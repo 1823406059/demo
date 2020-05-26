@@ -66,13 +66,13 @@ var setPie = function() {
 	var myChart = echarts.init(document.getElementById('pie_chart'));
 	//使用制定的配置项和数据显示图表
 	$.get('https://edu.telking.com/api/?type=week', function(data) {
-		var ListFirstArr = new Array(); 
+		var List = new Array(); 
 		for(var i=0;i<data.data.series.length;i++){
 			var item={
 				value: data.data.series[i],
 				name: data.data.xAxis[i]
 				};    
-				ListFirstArr.push(item);
+				List.push(item);
 		}
 		myChart.setOption({
 			title: {
@@ -83,7 +83,7 @@ var setPie = function() {
 			series: [{
 				smooth: true,
 				type: 'pie', // 设置图表类型为饼图
-				data: ListFirstArr
+				data: List
 			}]
 		})
 	}, 'json');
