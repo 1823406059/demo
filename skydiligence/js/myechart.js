@@ -6,7 +6,6 @@ $(document).ready(function() {
 var setLine = function() {
 	//初始化echarts实例
 	var myChart = echarts.init(document.getElementById('card_graph'));
-	
 	$.get('https://edu.telking.com/api/?type=month', function(data) {
 		myChart.setOption({
 			title: {
@@ -67,7 +66,14 @@ var setPie = function() {
 	var myChart = echarts.init(document.getElementById('pie_chart'));
 	//使用制定的配置项和数据显示图表
 	$.get('https://edu.telking.com/api/?type=week', function(data) {
-
+		var ListFirstArr = new Array(); 
+		for(var i=0;i<data.data.series.length;i++){
+			var item={
+				value: data.data.series[i],
+				name: data.data.xAxis[i]
+				};    
+				ListFirstArr.push(item);
+		}
 		myChart.setOption({
 			title: {
 				text: '饼状图数据展示',
@@ -77,28 +83,7 @@ var setPie = function() {
 			series: [{
 				smooth: true,
 				type: 'pie', // 设置图表类型为饼图
-				data: [{
-					value: data.data.series[0],
-					name: data.data.xAxis[0]
-				}, {
-					value: data.data.series[1],
-					name: data.data.xAxis[1]
-				}, {
-					value: data.data.series[2],
-					name: data.data.xAxis[2]
-				}, {
-					value: data.data.series[3],
-					name: data.data.xAxis[3]
-				}, {
-					value: data.data.series[4],
-					name: data.data.xAxis[4]
-				}, {
-					value: data.data.series[5],
-					name: data.data.xAxis[5]
-				}, {
-					value: data.data.series[6],
-					name: data.data.xAxis[6]
-				}]
+				data: ListFirstArr
 			}]
 		})
 	}, 'json');
