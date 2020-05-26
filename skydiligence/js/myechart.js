@@ -6,7 +6,7 @@ $(document).ready(function() {
 var setLine = function() {
 	//初始化echarts实例
 	var myChart = echarts.init(document.getElementById('card_graph'));
-	//https://edu.telking.com/api/?type=month
+	
 	$.get('https://edu.telking.com/api/?type=month', function(data) {
 		myChart.setOption({
 			title: {
